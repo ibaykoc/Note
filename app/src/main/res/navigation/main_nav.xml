@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~  Created by Mochammad Iqbal on 3/28/19 3:38 AM
+  ~  Copyright (c) 2019 . All rights reserved.
+  ~  Last modified 3/28/19 3:38 AM
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@id/homeFragment">
+    <fragment android:id="@+id/homeFragment" android:name="com.github.ibaykoc.HomeFragment"
+              android:label="home_fragment" tools:layout="@layout/home_fragment"/>
+</navigation>

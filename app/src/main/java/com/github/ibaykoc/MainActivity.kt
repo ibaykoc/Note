@@ -16,9 +16,5 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        createNote_FAB.setOnClickListener {
-            val i = Intent(this, CreateNoteActivity::class.java)
-            startActivity(i)
-        }
     }
 }
