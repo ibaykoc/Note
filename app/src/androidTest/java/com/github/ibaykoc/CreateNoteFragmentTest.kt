@@ -6,6 +6,7 @@
 
 package com.github.ibaykoc
 
+import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso
@@ -28,6 +29,7 @@ import org.junit.runner.RunWith
 class CreateNoteFragmentTest {
     private val titleEditText by lazy { onView(withId(R.id.title_EditText)) }
     private val noteEditText by lazy { onView(withId(R.id.note_EditText)) }
+    private val saveButton by lazy {onView(withId(R.id.save_Btn))}
     @Before
     fun setup() {
         launchFragmentInContainer<CreateNoteFragment>(themeResId = R.style.Theme_AppCompat)
@@ -46,6 +48,13 @@ class CreateNoteFragmentTest {
             check(matches(isDisplayed()))
             check(matches(isAssignableFrom(EditText::class.java)))
             check(matches(withHint("Note")))
+        }
+    }
+    @Test
+    fun haveSaveButtonWithCorrectProperty() {
+        saveButton.apply {
+            arrayOf(isDisplayed(), isAssignableFrom(Button::class.java), withText("Save"))
+                .forEach { check(matches(it)) }
         }
     }
 }

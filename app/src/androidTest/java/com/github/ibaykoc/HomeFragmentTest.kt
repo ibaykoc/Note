@@ -34,7 +34,7 @@ import org.junit.runner.RunWith
 
 /**
  * Note
- * Created by Mochammad Iqbal on 28/03/19.FloatingActionButton
+ * Created by Mochammad Iqbal on 28/03/19.
  */
 @RunWith(AndroidJUnit4::class)
 class HomeFragmentTest {
