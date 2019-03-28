@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~  Created by Mochammad Iqbal on 3/28/19 8:23 AM
+  ~  Copyright (c) 2019 . All rights reserved.
+  ~  Last modified 3/28/19 8:23 AM
+  -->
+
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".CreateNoteFragment">
+
+    <EditText
+            android:id="@+id/title_EditText"
+            android:hint="Title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    <EditText
+            android:id="@+id/note_EditText"
+            android:hint="Note"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+</FrameLayout>

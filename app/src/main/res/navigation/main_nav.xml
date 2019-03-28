@@ -10,5 +10,9 @@
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
             app:startDestination="@id/homeFragment">
     <fragment android:id="@+id/homeFragment" android:name="com.github.ibaykoc.HomeFragment"
-              android:label="home_fragment" tools:layout="@layout/home_fragment"/>
+              android:label="home_fragment" tools:layout="@layout/home_fragment">
+        <action android:id="@+id/action_homeFragment_to_createNoteFragment" app:destination="@id/createNoteFragment"/>
+    </fragment>
+    <fragment android:id="@+id/createNoteFragment" android:name="com.github.ibaykoc.CreateNoteFragment"
+              android:label="create_note_fragment" tools:layout="@layout/create_note_fragment"/>
 </navigation>
