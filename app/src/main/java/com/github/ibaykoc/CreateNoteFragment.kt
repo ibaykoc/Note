@@ -1,17 +1,19 @@
 /*
- *  Created by Mochammad Iqbal on 3/28/19 8:23 AM
+ *  Created by Mochammad Iqbal on 3/28/19 9:50 AM
  *  Copyright (c) 2019 . All rights reserved.
- *  Last modified 3/28/19 8:23 AM
+ *  Last modified 3/28/19 9:50 AM
  */
 
 package com.github.ibaykoc
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil.inflate
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import com.github.ibaykoc.databinding.CreateNoteFragmentBinding
 
 
 class CreateNoteFragment : Fragment() {
@@ -22,7 +24,9 @@ class CreateNoteFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.create_note_fragment, container, false)
+        val binding = inflate<CreateNoteFragmentBinding>(inflater, R.layout.create_note_fragment, container, false)
+        binding.note = Note("Title Test", "Note Test")
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

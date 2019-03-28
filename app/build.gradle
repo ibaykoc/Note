@@ -1,3 +1,9 @@
+/*
+ *  Created by Mochammad Iqbal on 3/28/19 9:50 AM
+ *  Copyright (c) 2019 . All rights reserved.
+ *  Last modified 3/28/19 9:35 AM
+ */
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
@@ -6,6 +12,9 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
         applicationId "com.github.ibaykoc"
         minSdkVersion 21
