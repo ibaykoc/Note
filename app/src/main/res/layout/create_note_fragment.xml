@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~  Created by Mochammad Iqbal on 3/28/19 9:50 AM
+  ~  Created by Mochammad Iqbal on 3/29/19 6:38 PM
   ~  Copyright (c) 2019 . All rights reserved.
-  ~  Last modified 3/28/19 9:45 AM
+  ~  Last modified 3/28/19 11:06 AM
   -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="note" type="com.github.ibaykoc.Note"/>
+        <variable name="viewModel" type="com.github.ibaykoc.CreateNoteViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             xmlns:tools="http://schemas.android.com/tools"
@@ -15,22 +15,26 @@
             tools:context=".CreateNoteFragment">
 
         <EditText
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/title_EditText"
                 android:hint="Title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@{note.title}"
+                android:layout_height="wrap_content"
+                android:text="@={viewModel.title}"
         />
         <EditText
                 android:id="@+id/note_EditText"
                 android:hint="Note"
+                app:layout_constraintTop_toBottomOf="@id/title_EditText"
+                app:layout_constraintBottom_toTopOf="@id/save_Btn"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@{note.note"/>
+                android:layout_height="0dp"
+                android:text="@={viewModel.noteBody}"/>
         <Button
                 android:id="@+id/save_Btn"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:text="Save"/>
+                android:text="Save"
+                android:onClick="@{() -> viewModel.saveNote()}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
