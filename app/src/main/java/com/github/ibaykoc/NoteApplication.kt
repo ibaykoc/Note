@@ -1,7 +1,7 @@
 /*
- *  Created by Mochammad Iqbal on 3/29/19 6:38 PM
+ *  Created by Mochammad Iqbal on 3/30/19 7:56 AM
  *  Copyright (c) 2019 . All rights reserved.
- *  Last modified 3/28/19 5:47 PM
+ *  Last modified 3/30/19 5:30 AM
  */
 
 package com.github.ibaykoc
@@ -19,7 +19,7 @@ class NoteApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@NoteApplication)
-            modules(noteRepositoryModule, createNoteModule)
+            modules(database, noteRepositoryModule, homeModule, createNoteModule)
         }
     }
 }

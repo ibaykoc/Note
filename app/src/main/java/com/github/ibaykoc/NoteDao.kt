@@ -1,7 +1,7 @@
 /*
- *  Created by Mochammad Iqbal on 3/29/19 6:38 PM
+ *  Created by Mochammad Iqbal on 3/30/19 7:56 AM
  *  Copyright (c) 2019 . All rights reserved.
- *  Last modified 3/29/19 6:38 PM
+ *  Last modified 3/30/19 7:28 AM
  */
 
 package com.github.ibaykoc
@@ -18,11 +18,11 @@ import androidx.room.Query
 @Dao
 interface NoteDao {
     @Query("SELECT * FROM note")
-    fun getAll(): List<Note>
+    suspend fun getAll(): List<Note>
 
     @Insert
-    fun insertAll(vararg notes: Note)
+    suspend fun insertAll(vararg notes: Note)
 
     @Delete
-    fun delete(note: Note)
+    suspend fun delete(note: Note)
 }

@@ -1,7 +1,7 @@
 /*
- *  Created by Mochammad Iqbal on 3/29/19 6:38 PM
+ *  Created by Mochammad Iqbal on 3/30/19 7:56 AM
  *  Copyright (c) 2019 . All rights reserved.
- *  Last modified 3/29/19 6:09 PM
+ *  Last modified 3/30/19 7:30 AM
  */
 
 package com.github.ibaykoc
@@ -10,8 +10,18 @@ import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class CreateNoteViewModel(private val repository: NoteRepository) : ViewModel(), Observable {
+class CreateNoteViewModel(private val repository: NoteRepository) : ViewModel(), Observable, CoroutineScope {
+    private val _job = Job()
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + _job
+
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
     }
 
@@ -35,6 +45,8 @@ class CreateNoteViewModel(private val repository: NoteRepository) : ViewModel(),
     }
 
     fun saveNote() {
-        note.value?.let { repository.save(it) }
+        launch(Dispatchers.IO) {
+            note.value?.let { repository.save(it) }
+        }
     }
 }

@@ -1,38 +1,69 @@
 /*
- *  Created by Mochammad Iqbal on 3/28/19 3:53 AM
+ *  Created by Mochammad Iqbal on 3/30/19 7:56 AM
  *  Copyright (c) 2019 . All rights reserved.
- *  Last modified 3/28/19 3:53 AM
+ *  Last modified 3/30/19 7:56 AM
  */
 
 package com.github.ibaykoc
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.github.ibaykoc.databinding.HomeFragmentBinding
+import com.github.ibaykoc.databinding.NoteListItemBinding
 import kotlinx.android.synthetic.main.home_fragment.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class HomeFragment : Fragment() {
 
-    private lateinit var viewModel: HomeViewModel
-
-
+    private val viewModel: HomeViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.home_fragment, container, false)
+        lifecycle.addObserver(viewModel)
+        val binding: HomeFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        noteList_RecyclerView.adapter = NoteListAdapter(viewModel).also { adapter ->
+            viewModel.notes.observe(this, Observer { adapter.notifyDataSetChanged() })
+        }
+        noteList_RecyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         createNote_FAB.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_createNoteFragment) }
     }
 
+    class NoteListAdapter(val viewModel: HomeViewModel) : RecyclerView.Adapter<NoteListAdapter.ViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+            val inflater = LayoutInflater.from(parent.context)
+            val noteListItemBinding: NoteListItemBinding =
+                DataBindingUtil.inflate(inflater, R.layout.note_list_item, parent, false)
+            return ViewHolder(noteListItemBinding)
+        }
+
+        override fun getItemCount() = viewModel.notes.value?.size ?: 1
+
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            viewModel.notes.value?.get(position)?.let {
+                holder.noteListItemBinding.apply {
+                    note = it
+                    executePendingBindings()
+                }
+            }
+        }
+
+        class ViewHolder(val noteListItemBinding: NoteListItemBinding) :
+            RecyclerView.ViewHolder(noteListItemBinding.root)
+    }
 }

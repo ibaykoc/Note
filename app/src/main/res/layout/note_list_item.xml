@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~  Created by Mochammad Iqbal on 3/30/19 7:56 AM
+  ~  Copyright (c) 2019 . All rights reserved.
+  ~  Last modified 3/30/19 4:58 AM
+  -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="note" type="com.github.ibaykoc.Note"/>
+    </data>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:text="@{note.title}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:text="@{note.note}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+</layout>
