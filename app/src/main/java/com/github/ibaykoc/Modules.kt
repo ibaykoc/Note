@@ -1,7 +1,7 @@
 /*
- *  Created by Mochammad Iqbal on 3/30/19 7:56 AM
+ *  Created by Mochammad Iqbal on 3/30/19 2:37 PM
  *  Copyright (c) 2019 . All rights reserved.
- *  Last modified 3/30/19 7:46 AM
+ *  Last modified 3/30/19 2:37 PM
  */
 
 package com.github.ibaykoc
@@ -18,9 +18,9 @@ import org.koin.dsl.module
 val database = module {
 
     single {
-        if (BuildConfig.DEBUG)
-            Room.inMemoryDatabaseBuilder(get(), NoteLocalDatabase::class.java).build()
-        else
+        //        if (BuildConfig.DEBUG)
+//            Room.inMemoryDatabaseBuilder(get(), NoteLocalDatabase::class.java).build()
+//        else
             Room.databaseBuilder(get(), NoteLocalDatabase::class.java, "NoteLocalDatabase").build()
     }
 }
@@ -36,7 +36,7 @@ val homeModule = module {
 }
 
 val createNoteModule = module {
-    viewModel {
-        CreateNoteViewModel(get())
+    viewModel { (noteUID: Int) ->
+        CreateNoteViewModel(noteUID, get())
     }
 }

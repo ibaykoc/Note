@@ -1,7 +1,7 @@
 /*
- *  Created by Mochammad Iqbal on 3/30/19 7:56 AM
+ *  Created by Mochammad Iqbal on 3/30/19 2:37 PM
  *  Copyright (c) 2019 . All rights reserved.
- *  Last modified 3/30/19 7:34 AM
+ *  Last modified 3/30/19 2:29 PM
  */
 
 apply plugin: 'com.android.application'
@@ -11,6 +11,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
+
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
     compileSdkVersion 28
@@ -23,6 +25,9 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        javaCompileOptions {
+            annotationProcessorOptions { arguments = ["room.schemaLocation": "$projectDir/schemas".toString()] } }
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         // The following argument makes the Android Test Orchestrator run its
@@ -64,6 +69,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.1'
     androidTestUtil 'androidx.test:orchestrator:1.1.1'
     debugImplementation 'androidx.fragment:fragment-testing:1.1.0-alpha05'
     testImplementation 'junit:junit:4.12'

@@ -1,7 +1,7 @@
 /*
- *  Created by Mochammad Iqbal on 3/30/19 7:56 AM
+ *  Created by Mochammad Iqbal on 3/30/19 2:37 PM
  *  Copyright (c) 2019 . All rights reserved.
- *  Last modified 3/30/19 7:56 AM
+ *  Last modified 3/30/19 2:37 PM
  */
 
 package com.github.ibaykoc
@@ -17,5 +17,9 @@ class NoteRepository(private val localDataSource: NoteLocalDatabase) {
 
     suspend fun loadAll(): List<Note> {
         return localDataSource.noteDao().getAll()
+    }
+
+    suspend fun getByUID(noteUID: Int): Note {
+        return localDataSource.noteDao().getByUID(noteUID)
     }
 }

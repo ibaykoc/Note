@@ -1,15 +1,12 @@
 /*
- *  Created by Mochammad Iqbal on 3/30/19 7:56 AM
+ *  Created by Mochammad Iqbal on 3/30/19 2:37 PM
  *  Copyright (c) 2019 . All rights reserved.
- *  Last modified 3/30/19 7:28 AM
+ *  Last modified 3/30/19 2:37 PM
  */
 
 package com.github.ibaykoc
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 /**
  * Note
@@ -17,10 +14,13 @@ import androidx.room.Query
  */
 @Dao
 interface NoteDao {
+    @Query("SELECT * FROM note WHERE uid=:noteUID")
+    suspend fun getByUID(noteUID: Int): Note
+
     @Query("SELECT * FROM note")
     suspend fun getAll(): List<Note>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg notes: Note)
 
     @Delete
